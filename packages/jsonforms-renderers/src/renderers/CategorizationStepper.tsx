@@ -29,6 +29,10 @@ import { type StepperMessage, stepperText } from '../utils/stepperText'
 // How far below the top of the viewport the step list sticks, and where a new
 // step scrolls to: set --form-steps-offset to clear a fixed app header.
 const OFFSET = 'var(--form-steps-offset, 16px)'
+// How far above the bottom of the viewport Back/Continue stick, and how much
+// less height the step list takes: set --form-steps-bottom-offset to clear a
+// bar the host sticks to the bottom below the stepper.
+const BOTTOM_OFFSET = 'var(--form-steps-bottom-offset, 0px)'
 
 interface Props {
   uischema: Categorization
@@ -201,7 +205,7 @@ const EditableStepper = ({ uischema, schema, path, renderers, cells, enabled }: 
           flex: '0 0 248px',
           position: 'sticky',
           top: OFFSET,
-          maxHeight: `calc(100vh - 2 * ${OFFSET})`,
+          maxHeight: `calc(100vh - 2 * ${OFFSET} - ${BOTTOM_OFFSET})`,
           overflowY: 'auto',
         }}
       >
@@ -331,7 +335,7 @@ const EditableStepper = ({ uischema, schema, path, renderers, cells, enabled }: 
           py="4"
           style={{
             position: 'sticky',
-            bottom: 0,
+            bottom: BOTTOM_OFFSET,
             zIndex: 1,
             borderTop: '1px solid var(--gray-a5)',
             background: 'var(--color-panel-solid)',

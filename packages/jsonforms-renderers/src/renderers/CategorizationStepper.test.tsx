@@ -179,6 +179,17 @@ describe('Categorization stepper', () => {
     expect(screen.getByRole('button', { name: 'Save as draft' })).toBeTruthy()
   })
 
+  // jsdom resolves no CSS variables: the inline styles are checked as written.
+  it("sticks Back/Continue and sizes the step list clear of the host's bottom bar", () => {
+    render(<Form uischema={stepper()} data={{ exporter: 'A', vessel: 'V' }} />)
+
+    const footer = continueButton().parentElement as HTMLElement
+    expect(footer.style.position).toBe('sticky')
+    expect(footer.style.bottom).toBe('var(--form-steps-bottom-offset, 0px)')
+    const stepList = screen.getByRole('navigation')
+    expect(stepList.style.maxHeight).toContain('var(--form-steps-bottom-offset, 0px)')
+  })
+
   // jsdom has no layout: the stepper's top is placed by stubbing
   // getBoundingClientRect, against a scroll offset of 0.
   const placeTop = (top: number) => {

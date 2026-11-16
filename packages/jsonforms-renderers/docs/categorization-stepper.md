@@ -21,6 +21,7 @@ A `Categorization` renders as tabs by default. With `options.variant: "stepper"`
 - A read-only form (`<JsonForms readonly>`) shows every step on one page, without buttons. With more than one section, the step list sits at the side as a contents list (a **Jump to section** menu on narrow screens): choosing an entry scrolls to its section, and the entry for the section being read is marked as the page scrolls.
 - A form opened with saved answers (a draft) has its answered, complete steps open in the step list.
 - On a step change, the page scrolls to the stepper and focus moves to the step's title. If the app has a fixed header, set `--form-steps-offset` to its height plus a gap (default `16px`); the step list sticks that far from the top too.
+- **Back** and **Continue** stick to the bottom of the screen. If the host sticks a bar of its own to the bottom below the stepper (its submit buttons, when the stepper is not the root of the form), set `--form-steps-bottom-offset` to that bar's height (default `0px`): Back and Continue stick that far above the bottom, and the step list leaves room for the bar.
 - The **Complete these fields** links focus a field through its input `id` (its data path). Text, number, date, select and checkbox controls set one; radio, list and file controls don't, so their links do nothing.
 
 ## The host's part
